@@ -15,7 +15,7 @@ final class ArticlesViewModelErr: ObservableObject {
     @Published var indexEndpoint: Int = 0
     @Published var searchString: String = "sports"
     // output
-    @Published var articles = [Article]()
+    @Published var articles = [ArticleJSON]()
     @Published var articlesError: NewsError?
     
     private var validString:  AnyPublisher<String, Never> {
@@ -31,13 +31,13 @@ final class ArticlesViewModelErr: ObservableObject {
         Publishers.CombineLatest( $indexEndpoint, validString)
         .setFailureType(to: NewsError.self)
         .flatMap {  (indexEndpoint, search) ->
-                               AnyPublisher<[Article], NewsError> in
+                               AnyPublisher<[ArticleJSON], NewsError> in
             if 3...30 ~= search.count {
-            self.articles = [Article]()
+            self.articles = [ArticleJSON]()
             return self.newsAPI.fetchArticlesErr(from:
                     Endpoint( index: indexEndpoint, text: search)!)
             } else {
-                return Just([Article]())
+                return Just([ArticleJSON]())
                     .setFailureType(to: NewsError.self)
                     .eraseToAnyPublisher()
             }

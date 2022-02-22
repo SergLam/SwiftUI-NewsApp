@@ -14,7 +14,7 @@ final class ArticlesViewModel: ObservableObject {
     @Published var indexEndpoint: Int = 0
     @Published var searchString: String = "sports"
     // output
-    @Published var articles = [Article]()
+    @Published var articles = [ArticleJSON]()
     
     private var validString:  AnyPublisher<String, Never> {
         $searchString
@@ -27,8 +27,8 @@ final class ArticlesViewModel: ObservableObject {
         self.indexEndpoint = index
         self.searchString = text
         Publishers.CombineLatest( $indexEndpoint,  validString)
-        .flatMap { (indexEndpoint, search) -> AnyPublisher<[Article], Never> in
-                self.articles = [Article]()
+        .flatMap { (indexEndpoint, search) -> AnyPublisher<[ArticleJSON], Never> in
+                self.articles = [ArticleJSON]()
                 return NewsAPI.shared.fetchArticles(from:
                                Endpoint( index: indexEndpoint, text: search )!)
         }

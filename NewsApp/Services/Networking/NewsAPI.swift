@@ -161,43 +161,43 @@ class NewsAPI {
     
   // Асинхронная выборка статей
      func fetchArticles(from endpoint: Endpoint)
-                                     -> AnyPublisher<[Article], Never> {
+                                     -> AnyPublisher<[ArticleJSON], Never> {
          guard let url = endpoint.absoluteURL else {
-                     return Just([Article]()).eraseToAnyPublisher() // 0
+                     return Just([ArticleJSON]()).eraseToAnyPublisher() // 0
          }
          return fetch(url)                                          // 1
-             .map { (response: NewsResponse) -> [Article] in        // 2
+             .map { (response: NewsResponseJSON) -> [ArticleJSON] in        // 2
                              return response.articles }
-                .replaceError(with: [Article]())                    // 3
+                .replaceError(with: [ArticleJSON]())                    // 3
                 .eraseToAnyPublisher()                              // 4
      }
     
     // Асинхронная выборка источников информации
     func fetchSources(for country: String)
-                                       -> AnyPublisher<[Source], Never> {
+                                       -> AnyPublisher<[SourceJSON], Never> {
         guard let url = Endpoint.sources(country: country).absoluteURL
             else {
-                    return Just([Source]()).eraseToAnyPublisher() // 0
+                    return Just([SourceJSON]()).eraseToAnyPublisher() // 0
         }
         return fetch(url)                                         // 1
-            .map { (response: SourcesResponse) -> [Source] in     // 2
+            .map { (response: SourcesResponseJSON) -> [SourceJSON] in     // 2
                             response.sources }
-               .replaceError(with: [Source]())                    // 3
+               .replaceError(with: [SourceJSON]())                    // 3
                .eraseToAnyPublisher()                             // 4
     }
     
     
      // Асинхронная  выборка статей  с сообщением об ошибке
        func fetchArticlesErr(from endpoint: Endpoint) ->
-                                           AnyPublisher<[Article], NewsError>{
-           Future<[Article], NewsError> { [unowned self] promise in
+                                           AnyPublisher<[ArticleJSON], NewsError>{
+           Future<[ArticleJSON], NewsError> { [unowned self] promise in
     
                guard let url = endpoint.absoluteURL  else {
                    return promise(
                        .failure(.urlError(URLError(.unsupportedURL))))     // 0
                }
                self.fetchErr(url)                                          // 1
-                 .tryMap { (result: NewsResponse) -> [Article] in          // 2
+                 .tryMap { (result: NewsResponseJSON) -> [ArticleJSON] in          // 2
                          result.articles }
                   .sink(
                    receiveCompletion: { (completion) in                     // 3
@@ -222,14 +222,14 @@ class NewsAPI {
     
     // Асинхронная выборка источников  с сообщением об ошибке
     func fetchSourcesErr(for country: String) ->
-                                        AnyPublisher<[Source], NewsError>{
-        Future<[Source], NewsError> { [unowned self] promise in
+                                        AnyPublisher<[SourceJSON], NewsError>{
+        Future<[SourceJSON], NewsError> { [unowned self] promise in
             guard let url = Endpoint.sources(country: country).absoluteURL  else {
                 return promise(
                     .failure(.urlError(URLError(.unsupportedURL))))           // 0
             }
             self.fetchErr(url)                                                // 1
-              .tryMap { (result: SourcesResponse) -> [Source] in              // 2
+              .tryMap { (result: SourcesResponseJSON) -> [SourceJSON] in              // 2
                       result.sources }
                .sink(
                 receiveCompletion: { (completion) in                          // 3
@@ -256,14 +256,14 @@ class NewsAPI {
     
     /*
      // Выборка статей без Generic "издателя"
-    func fetchArticles(from endpoint: Endpoint) -> AnyPublisher<[Article], Never> {
+    func fetchArticles(from endpoint: Endpoint) -> AnyPublisher<[ArticleJSON], Never> {
         guard let url = endpoint.absoluteURL else {                       // 0
-                    return Just([Article]()).eraseToAnyPublisher()
+                    return Just([ArticleJSON]()).eraseToAnyPublisher()
         }
            return
             URLSession.shared.dataTaskPublisher(for:url)                  // 1
             .map{$0.data}                                                 // 2
-            .decode(type: NewsResponse.self,                              // 3
+            .decode(type: NewsResponseJSON.self,                              // 3
                     decoder: APIConstants .jsonDecoder)
             .map{$0.articles}                                             // 4
             .replaceError(with: [])                                       // 5
@@ -272,14 +272,14 @@ class NewsAPI {
     }
     
     // Выборка источников информации  без Generic "издателя"
-    func fetchSources() -> AnyPublisher<[Source], Never> {
+    func fetchSources() -> AnyPublisher<[SourceJSON], Never> {
         guard let url = Endpoint.sources.absoluteURL else {                // 0
-                       return Just([Source]()).eraseToAnyPublisher()
+                       return Just([SourceJSON]()).eraseToAnyPublisher()
            }
               return
                URLSession.shared.dataTaskPublisher(for:url)               // 1
                .map{$0.data}                                              // 2
-               .decode(type: SourcesResponse.self,                        // 3
+               .decode(type: SourcesResponseJSON.self,                        // 3
                        decoder: APIConstants .jsonDecoder)
                .map{$0.sources}                                           // 4
                .replaceError(with: [])                                    // 5
@@ -290,8 +290,8 @@ class NewsAPI {
      /*
       // Выборка статей с ошибкой без Generic "издателя"
            func fetchArticlesErr(from endpoint: Endpoint) ->
-                                               AnyPublisher<[Article], NewsError>{
-               return Future<[Article], NewsError> { [unowned self] promise in
+                                               AnyPublisher<[ArticleJSON], NewsError>{
+               return Future<[ArticleJSON], NewsError> { [unowned self] promise in
                    guard let url = endpoint.absoluteURL  else {
                        return promise(.failure(.urlError(                          // 0
                                                     URLError(.unsupportedURL))))
@@ -307,7 +307,7 @@ class NewsAPI {
                                 }
                            return data
                        }
-                    .decode(type: NewsResponse.self,
+                    .decode(type: NewsResponseJSON.self,
                                                   decoder: APIConstants.jsonDecoder) // 3
                     .receive(on: RunLoop.main)                                       // 4
                       .sink(

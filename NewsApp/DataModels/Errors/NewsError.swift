@@ -18,7 +18,7 @@ enum NewsError: Error, LocalizedError, Identifiable {
         case .urlError(let error):
             return error.localizedDescription
             
-        case .responseError(let status, let message):
+        case .responseError((let status, let message)):
             let range = (message.range(of: "message\":")?.upperBound
                      ?? message.startIndex)..<message.endIndex
             return "Bad response code: \(status) message : \(message[range])"

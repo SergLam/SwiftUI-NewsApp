@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DetailSourceView: View {
- var source: Source
+ var source: SourceJSON
  @ObservedObject var articlesViewModel : ArticlesViewModel
  
     @State var shouldPresent: Bool = false

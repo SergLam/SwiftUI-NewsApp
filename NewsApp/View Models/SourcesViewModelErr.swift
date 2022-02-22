@@ -15,7 +15,7 @@ final class SourcesViewModelErr: ObservableObject {
     @Published var searchString: String = ""
     @Published var country: String = "us"
     // output
-    @Published var sources = [Source]()
+    @Published var sources = [SourceJSON]()
     @Published var sourcesError: NewsError?
     
     private var validString:  AnyPublisher<String, Never> {
@@ -28,7 +28,7 @@ final class SourcesViewModelErr: ObservableObject {
           Publishers.CombineLatest( $country,  validString)
           .setFailureType(to: NewsError.self)
           .flatMap {  (country, search) ->
-                                 AnyPublisher<[Source], NewsError> in
+                                 AnyPublisher<[SourceJSON], NewsError> in
               return self.newsAPI.fetchSourcesErr(for: country)
              .map{search == "" ? $0 : $0.filter {
                     ($0.name?.lowercased().contains(search.lowercased()))!}}
@@ -48,7 +48,7 @@ final class SourcesViewModelErr: ObservableObject {
  /*
     init() {
         Publishers.CombineLatest( $country,  validString)
-        .flatMap { (country,search) -> AnyPublisher<[Source], Never> in
+        .flatMap { (country,search) -> AnyPublisher<[SourceJSON], Never> in
             NewsAPI.shared.fetchSources(for: country)
             .map{search == "" ? $0 : $0.filter {
                     ($0.name?.lowercased().contains(search.lowercased()))!}}

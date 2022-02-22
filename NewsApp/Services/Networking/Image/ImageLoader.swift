@@ -9,27 +9,6 @@
 import UIKit
 import Combine
 
- //---------------
-class ImageLoaderCache {
-    static let shared = ImageLoaderCache()
-    var loaders: NSCache<NSString, ImageLoader> = NSCache()
-    
-    func loaderFor(article: Article) -> ImageLoader {
-        let key = NSString(string: "\(article.title)")
-        if let loader = loaders.object(forKey: key) {
-            return loader
-        } else {
-            let url = (article.urlToImage != nil && article.urlToImage != "null")
-                ? URL(string: article.urlToImage!)
-                : nil
-            let loader = ImageLoader (url: url)
-            loaders.setObject(loader, forKey: key)
-            return loader
-        }
-    }
-}
-// -----------------
-
 final class ImageLoader: ObservableObject {
     // input
     @Published var url: URL?

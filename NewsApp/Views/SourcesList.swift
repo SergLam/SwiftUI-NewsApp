@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SourcesList: View {
-    var sources: [Source]
+    var sources: [SourceJSON]
     
     var body: some View {
         List {
@@ -41,9 +41,9 @@ struct SourcesList: View {
       } // body
 }
 
-let sampleSource1 = Source(id: "abc-news", name: "ABC News", description: "Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.", country: "us", category: "general", url: "https://abcnews.go.com")
+let sampleSource1 = SourceJSON(id: "abc-news", name: "ABC News", description: "Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.", country: "us", category: "general", url: "https://abcnews.go.com")
 
-let sampleSource2 = Source(id: "cnbc", name: "CNBC", description:"Get latest business news on stock markets, financial & earnings on CNBC. View world markets streaming charts & video; check stock tickers and quotes." , country: "us", category: "business", url: "http://www.cnbc.com")
+let sampleSource2 = SourceJSON(id: "cnbc", name: "CNBC", description:"Get latest business news on stock markets, financial & earnings on CNBC. View world markets streaming charts & video; check stock tickers and quotes." , country: "us", category: "business", url: "http://www.cnbc.com")
 
 struct SourcesList_Previews: PreviewProvider {
     static var previews: some View {

@@ -14,7 +14,7 @@ final class SourcesViewModel: ObservableObject {
     @Published var searchString: String = ""
     @Published var country: String = "us"
     // output
-    @Published var sources = [Source]()
+    @Published var sources = [SourceJSON]()
     
     private var validString:  AnyPublisher<String, Never> {
         $searchString
@@ -25,7 +25,7 @@ final class SourcesViewModel: ObservableObject {
     
     init() {
         Publishers.CombineLatest( $country,  validString)
-        .flatMap { (country,search) -> AnyPublisher<[Source], Never> in
+        .flatMap { (country,search) -> AnyPublisher<[SourceJSON], Never> in
             NewsAPI.shared.fetchSources(for: country)
             .map{search == "" ? $0 : $0.filter {
                     ($0.name?.lowercased().contains(search.lowercased()))!}}
