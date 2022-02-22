@@ -196,6 +196,30 @@
 			path = Plist;
 			sourceTree = "<group>";
 		};
+		0465EF5E27C58B8100438543 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0465EF5F27C58BAB00438543 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E44C4E7023D9A498001E3D64 /* SafariView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		0465EF6027C5939200438543 /* UserStory */ = {
+			isa = PBXGroup;
+			children = (
+				E45339F923B4F67700C03AC1 /* View Models */,
+				E45339F823B4F64D00C03AC1 /* Views */,
+			);
+			path = UserStory;
+			sourceTree = "<group>";
+		};
 		E44C4E6923D8AF35001E3D64 /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +232,7 @@
 		E45339F823B4F64D00C03AC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0465EF5F27C58BAB00438543 /* Common */,
 				E467587323E3434700E98AE5 /* TabedView.swift */,
 				E470D66523A8E24400D26871 /* ContentViewArticles.swift */,
 				E43B7B1723E72459008039FD /* ContentView.swift */,
@@ -216,7 +241,6 @@
 				E44C4E7223D9A965001E3D64 /* SourcesList.swift */,
 				E44C4E7C23D9FB52001E3D64 /* DetailSourceView.swift */,
 				E470D66723A8E74E00D26871 /* ArticleImage.swift */,
-				E44C4E7023D9A498001E3D64 /* SafariView.swift */,
 				E44C4E6A23D8B360001E3D64 /* SearchView.swift */,
 			);
 			path = Views;
@@ -262,13 +286,13 @@
 		E470D64A23A8B3E800D26871 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				0465EF6027C5939200438543 /* UserStory */,
+				0465EF5E27C58B8100438543 /* Extensions */,
 				0465EF5A27C5053600438543 /* Resources */,
 				0465EF5927C5051A00438543 /* BundleFiles */,
 				0465EF4E27C502A900438543 /* Services */,
 				0465EF4D27C5022B00438543 /* DataModels */,
 				0465EF4A27C5010800438543 /* Application */,
-				E45339F823B4F64D00C03AC1 /* Views */,
-				E45339F923B4F67700C03AC1 /* View Models */,
 				E470D65323A8B3EE00D26871 /* Preview Content */,
 			);
 			path = NewsApp;
@@ -516,7 +540,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NewsApp/Preview Content\"";
 				DEVELOPMENT_TEAM = QLY879YR3Y;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/NewsApp/BunleFiles/Plist/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/NewsApp/BundleFiles/Plist/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -536,7 +560,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NewsApp/Preview Content\"";
 				DEVELOPMENT_TEAM = QLY879YR3Y;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/NewsApp/BunleFiles/Plist/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/NewsApp/BundleFiles/Plist/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

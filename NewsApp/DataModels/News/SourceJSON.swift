@@ -8,11 +8,23 @@
 
 import Foundation
 
-struct SourceJSON: Codable,Identifiable {
+struct SourceJSON: Codable, Identifiable {
+    
     let id: String?
     let name: String?
     let description: String?
     let country: String?
     let category: String?
     let url: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case description = "description"
+        case country = "country"
+        case category = "category"
+        case url = "url"
+    }
+    
+    
 }
