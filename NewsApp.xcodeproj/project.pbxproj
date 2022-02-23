@@ -121,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04315C4127C6DA4F0047C8ED /* TabBarView */ = {
+			isa = PBXGroup;
+			children = (
+				E467587323E3434700E98AE5 /* TabedView.swift */,
+			);
+			path = TabBarView;
+			sourceTree = "<group>";
+		};
 		0465EF4A27C5010800438543 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,8 +399,8 @@
 		E45339F823B4F64D00C03AC1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04315C4127C6DA4F0047C8ED /* TabBarView */,
 				0465EF5F27C58BAB00438543 /* Common */,
-				E467587323E3434700E98AE5 /* TabedView.swift */,
 				E470D66523A8E24400D26871 /* ContentViewArticles.swift */,
 				E43B7B1723E72459008039FD /* ContentView.swift */,
 				E44C4E6E23D99AFE001E3D64 /* ContentViewSources.swift */,
@@ -445,13 +453,13 @@
 		E470D64A23A8B3E800D26871 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
-				0465EF6027C5939200438543 /* UserStory */,
 				0465EF5E27C58B8100438543 /* Extensions */,
 				0465EF5A27C5053600438543 /* Resources */,
 				0465EF5927C5051A00438543 /* BundleFiles */,
 				0465EF4E27C502A900438543 /* Services */,
 				0465EF4D27C5022B00438543 /* DataModels */,
 				0465EF4A27C5010800438543 /* Application */,
+				0465EF6027C5939200438543 /* UserStory */,
 				E470D65323A8B3EE00D26871 /* Preview Content */,
 			);
 			path = NewsApp;

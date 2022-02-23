@@ -13,14 +13,14 @@ enum Endpoint {
     case topHeadLines
     case articlesFromCategory(_ category: String)
     case articlesFromSource(_ source: String)
-    case search (searchFilter: String)
-    case sources (country: String)
+    case search(searchFilter: String)
+    case sources(country: String)
     
     var baseURL:URL {
         return Environment.restBaseURL
     }
     
-    func path() -> String {
+    var path: String {
         switch self {
         case .topHeadLines, .articlesFromCategory:
             return "top-headlines"
@@ -32,7 +32,7 @@ enum Endpoint {
     }
     
     var absoluteURL: URL? {
-        let queryURL = baseURL.appendingPathComponent(self.path())
+        let queryURL = baseURL.appendingPathComponent(self.path)
         let components = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)
         guard var urlComponents = components else {
             return nil

@@ -26,5 +26,27 @@ struct SourceJSON: Codable, Identifiable {
         case url = "url"
     }
     
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decodeIfPresentForce(String.self, forKey: .id)
+        name = try container.decodeIfPresentForce(String.self, forKey: .name)
+        description = try container.decodeIfPresentForce(String.self, forKey: .description)
+        country = try container.decodeIfPresentForce(String.self, forKey: .country)
+        category = try container.decodeIfPresentForce(String.self, forKey: .category)
+        url = try container.decodeIfPresentForce(String.self, forKey: .url)
+    }
     
+    init(id: String?,
+         name: String?,
+         description: String?,
+         country: String?,
+         category: String?,
+         url: String?) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.country = country
+        self.category = category
+        self.url = url
+    }
 }

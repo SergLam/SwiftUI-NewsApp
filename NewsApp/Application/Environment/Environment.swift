@@ -13,9 +13,10 @@ private enum UserDefinedKeys: String, CaseIterable {
     // MARK: - Base URL keys
     case unknown = "unknown"
     case restBaseURL = "REST_BASE_URL"
+    case newsApiKey = "NEWS_API_KEY"
 }
 
- enum Environment {
+enum Environment {
     
     private static let dictionary: [String: Any] = {
         guard let dict = Bundle.main.infoDictionary else {
@@ -44,17 +45,24 @@ private enum UserDefinedKeys: String, CaseIterable {
         }
         return buildNumber
     }()
-     
-    // MARK: - Facebook Constants
-     static let restBaseURL: URL = {
-         guard let restBaseURLString = Bundle.main.infoDictionary?[UserDefinedKeys.restBaseURL.rawValue] as? String else {
-             preconditionFailure("Unable to get app FB App ID")
-         }
-         guard let url = URL(string: restBaseURLString) else {
-             preconditionFailure("Unable to get create URL")
-         }
-         return url
-     }()
+    
+    // MARK: - Networking Constants
+    static let restBaseURL: URL = {
+        guard let restBaseURLString = Bundle.main.infoDictionary?[UserDefinedKeys.restBaseURL.rawValue] as? String else {
+            preconditionFailure("Unable to get app FB App ID")
+        }
+        guard let url = URL(string: restBaseURLString) else {
+            preconditionFailure("Unable to get create URL")
+        }
+        return url
+    }()
+    
+    static let newsApiKey: String = {
+        guard let string = Bundle.main.infoDictionary?[UserDefinedKeys.newsApiKey.rawValue] as? String else {
+            preconditionFailure("Unable to get app FB App ID")
+        }
+        return string
+    }()
     
     // MARK: - Mock API flag
     static var isMockApi: Bool {

@@ -16,6 +16,8 @@ final class ImageLoader: ObservableObject {
     @Published var image: UIImage?
     @Published var noData = false
 
+    private var cancellableSet: Set<AnyCancellable> = []
+    
     // Init with Error
     init(url: URL?) {
         self.url = url
@@ -63,8 +65,6 @@ final class ImageLoader: ObservableObject {
         }
             .eraseToAnyPublisher()                              // 8
     }
-    
-    private var cancellableSet: Set<AnyCancellable> = []
   }
 
     /*

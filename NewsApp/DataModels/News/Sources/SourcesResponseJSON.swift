@@ -11,4 +11,15 @@ import Foundation
 struct SourcesResponseJSON: Codable {
     let status: String
     let sources: [SourceJSON]
+    
+    enum CodingKeys: String, CodingKey {
+        case status = "status"
+        case sources = "sources"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        status = try container.decodeForce(String.self, forKey: .status)
+        sources = try container.decode([SourceJSON].self, forKey: .sources)
+    }
 }

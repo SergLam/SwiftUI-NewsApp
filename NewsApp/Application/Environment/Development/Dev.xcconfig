@@ -7,3 +7,6 @@
 //
 
 REST_BASE_URL = https:/$()/newsapi.org/v2/
+
+// News API key url: https://newsapi.org
+NEWS_API_KEY = dad56f872c6e425f8992c93c87060824
