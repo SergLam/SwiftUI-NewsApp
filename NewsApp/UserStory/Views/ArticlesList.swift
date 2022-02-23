@@ -22,7 +22,7 @@ struct ArticlesList: View {
                        HStack {
                        Text("\( article.source.name != nil ? article.source.name! : "")")
                            Spacer()
-                        Text(APIConstants.formatter.string(from: article.publishedAt!))
+                        Text(RestApiConstants.formatter.string(from: article.publishedAt!))
                        }
                        .foregroundColor(Color.blue)
                        ArticleImage(imageLoader: ImageLoaderCache.shared.loaderFor(

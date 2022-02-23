@@ -1,0 +1,9 @@
+//
+//  Dev.xcconfig
+//  NewsApp
+//
+//  Created by Serhii Liamtsev on 2/12/22.
+//  Copyright © 2022 Serg Liamtsev. All rights reserved.
+//
+
+REST_BASE_URL = https:/$()/newsapi.org/v2/
