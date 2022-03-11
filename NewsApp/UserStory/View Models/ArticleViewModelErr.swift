@@ -10,13 +10,16 @@ import Combine
 import Foundation
 
 final class ArticlesViewModelErr: ObservableObject {
-     var newsAPI = NewsAPI.shared
+    
+    var newsAPI = NewsAPI.shared
     // input
     @Published var indexEndpoint: Int = 0
-    @Published var searchString: String = "sports"
+    @Published var searchString: String = LocalizedStrings.articleSearchDefaultText
     // output
     @Published var articles = [ArticleJSON]()
     @Published var articlesError: NewsError?
+    
+    private var cancellableSet: Set<AnyCancellable> = []
     
     private var validString:  AnyPublisher<String, Never> {
         $searchString
@@ -25,7 +28,7 @@ final class ArticlesViewModelErr: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    init(index:Int = 0, text: String = "sports") {
+    init(index:Int = 0, text: String = LocalizedStrings.articleSearchDefaultText) {
         self.indexEndpoint = index
         self.searchString = text
         Publishers.CombineLatest( $indexEndpoint, validString)
@@ -52,8 +55,4 @@ final class ArticlesViewModelErr: ObservableObject {
         })
         .store(in: &self.cancellableSet)
     }
-    private var cancellableSet: Set<AnyCancellable> = []
 }
-
-   
-

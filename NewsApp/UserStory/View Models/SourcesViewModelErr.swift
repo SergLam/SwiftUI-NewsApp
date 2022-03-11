@@ -13,7 +13,7 @@ final class SourcesViewModelErr: ObservableObject {
      var newsAPI = NewsAPI.shared
     // input
     @Published var searchString: String = ""
-    @Published var country: String = "us"
+    @Published var country: String = SupportedCountries.unitedStates.rawValue
     // output
     @Published var sources = [SourceJSON]()
     @Published var sourcesError: NewsError?

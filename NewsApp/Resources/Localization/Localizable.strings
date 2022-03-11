@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  NewsApp
+
+  Created by Serhii Liamtsev on 3/11/22.
+  Copyright © 2022 Serhii Liamtsev. All rights reserved.
+*/
+
+
+
+// MARK: - Articles
+
+/** Articles search screen - default text for search field. */
+"articles.search.default-text" = "sports";

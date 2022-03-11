@@ -1,0 +1,37 @@
+/* 
+  InfoPlist.strings
+  NewsApp
+
+  Created by Serhii Liamtsev on 3/11/22.
+  Copyright © 2022 Serhii Liamtsev. All rights reserved.
+*/
+
+/* Application Display Name. */
+CFBundleDisplayName = "News App";
+
+/* Short Application Display Name, max length 16 characters. */
+CFBundleName = "News App";
+
+/* Camera permission popup disclaimer text. */
+NSCameraUsageDescription = "News App needs access to your camera for you to be able to attach images.";
+
+/* Photo library permission popup disclaimer text. */
+NSPhotoLibraryUsageDescription = "News App needs access to your photo library for you to be able to attach images.";
+
+/* Location permission, when app is foreground, popup disclaimer text. */
+NSLocationWhenInUseUsageDescription = "Turn on location services to find information and services that are relevant to your location.";
+
+/* Location permission, for all app modes - both background and foreground, popup disclaimer text. */
+NSLocationAlwaysUsageDescription = "Turn on location services to receive questions and find information that are relevant to your location.";
+
+/* Location permission, for all app modes - both background and foreground, popup disclaimer text. */
+NSLocationAlwaysAndWhenInUseUsageDescription = "Turn on location services to receive questions and find information that are relevant to your location.";
+
+/* Microphone permission popup disclaimer text. */
+NSMicrophoneUsageDescription = "News App needs access to the microphone to be able to recognize your speech for books search.";
+
+/* Speech recognition permission popup disclaimer text. */
+NSSpeechRecognitionUsageDescription = "News App needs access to recognize your speech for books search.";
+
+/* User actions tracking (for advertisement purposes) permission popup disclaimer text. */
+NSUserTrackingUsageDescription = "This will let us recommend you more relevant audio content.";

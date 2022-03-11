@@ -5,16 +5,18 @@
 //  Created by Tatiana Kornilova on 28/10/2019.
 //
 
-// View Model для статей
 import Combine
 import Foundation
 
 final class ArticlesViewModel: ObservableObject {
+    
     // input
     @Published var indexEndpoint: Int = 0
-    @Published var searchString: String = "sports"
+    @Published var searchString: String = LocalizedStrings.articleSearchDefaultText
     // output
     @Published var articles = [ArticleJSON]()
+    
+    private var cancellableSet: Set<AnyCancellable> = []
     
     private var validString:  AnyPublisher<String, Never> {
         $searchString
@@ -23,7 +25,7 @@ final class ArticlesViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    init(index:Int = 0, text: String = "sports") {
+    init(index:Int = 0, text: String = LocalizedStrings.articleSearchDefaultText) {
         self.indexEndpoint = index
         self.searchString = text
         Publishers.CombineLatest( $indexEndpoint,  validString)
@@ -35,9 +37,4 @@ final class ArticlesViewModel: ObservableObject {
         .assign(to: \.articles, on: self)
         .store(in: &self.cancellableSet)
     }
-    
-    private var cancellableSet: Set<AnyCancellable> = []
 }
-
-   
-

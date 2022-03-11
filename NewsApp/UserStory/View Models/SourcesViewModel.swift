@@ -10,9 +10,10 @@ import Combine
 import Foundation
 
 final class SourcesViewModel: ObservableObject {
+    
     // input
     @Published var searchString: String = ""
-    @Published var country: String = "us"
+    @Published var country: String = SupportedCountries.unitedStates.rawValue
     // output
     @Published var sources = [SourceJSON]()
     
