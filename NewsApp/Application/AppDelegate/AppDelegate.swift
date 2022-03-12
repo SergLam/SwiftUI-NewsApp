@@ -29,6 +29,4 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         
     }
-
-///*"dad56f872c6e425f8992c93c87060824"*/
 }

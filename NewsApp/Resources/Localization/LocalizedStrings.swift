@@ -42,6 +42,10 @@ struct LocalizedStrings {
         return NSLocalizedString("articles.categories.default-search-text", tableName: nil, bundle: stringsBundle, value: "", comment: "Articles search screen - default search text.")
     }
     
+    static var articlesSearchTabTitle: String {
+        return NSLocalizedString("articles.search.tab-title", tableName: nil, bundle: stringsBundle, value: "", comment: "Articles - search tab title.")
+    }
+    
     // MARK: - Articles categories
     
     static var articlesCategorySports: String {

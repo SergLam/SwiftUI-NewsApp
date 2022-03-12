@@ -14,7 +14,6 @@
 /** Search text field placeholder. */
 "search.field-placeholder" = "search";
 
-
 // MARK: - Articles
 
 /** Articles search screen - default text for search field. */
@@ -28,6 +27,9 @@
 
 /** Articles search screen - default search text. */
 "articles.categories.default-search-text" = "science";
+
+/** Articles - search tab title. */
+"articles.search.tab-title" = "search";
 
 // MARK: - Articles categories
 
