@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SourceJSON: Codable, Identifiable {
+struct SourceJSON: Codable, Identifiable, JSONAble {
     
     let id: String?
     let name: String?
@@ -48,5 +48,16 @@ struct SourceJSON: Codable, Identifiable {
         self.country = country
         self.category = category
         self.url = url
+    }
+}
+
+// MARK: - Mockable
+extension SourceJSON: Mockable {
+    
+    typealias MockType = SourceJSON
+    
+    static func mock(isSuccess: Bool) -> SourceJSON {
+        let id: String = UUID().uuidString
+        return SourceJSON(id: id, name: "ABC News", description: "Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com. \(id)", country: "us", category: "general", url: "https://abcnews.go.com")
     }
 }

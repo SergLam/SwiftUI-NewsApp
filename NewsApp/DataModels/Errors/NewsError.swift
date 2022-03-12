@@ -7,7 +7,11 @@
 import Foundation
 
 enum NewsError: Error, LocalizedError, Identifiable {
-    var id: String { localizedDescription }
+    
+    var id: String {
+        return localizedDescription
+    }
+    
     case urlError(URLError)
     case responseError((Int, String))
     case decodingError(DecodingError)
@@ -46,6 +50,14 @@ enum NewsError: Error, LocalizedError, Identifiable {
         case .genericError:
             return "An unknown error has been occured"
         }
+    }
+    
+    var errorDescription: String? {
+        return self.localizedDescription
+    }
+    
+    var failureReason: String? {
+        return self.localizedDescription
     }
 }
 

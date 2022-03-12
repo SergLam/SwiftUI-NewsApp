@@ -48,12 +48,27 @@ struct ArticleImage: View {
     } // body
 }
 
+#if DEBUG
+#if targetEnvironment(simulator)
+
+// MARK: - Preview
 struct ArticleImage_Previews: PreviewProvider {
+    
+    static var devices = AppConstants.previewDevices
+    
+    static var platform: PreviewPlatform? {
+        return SwiftUI.PreviewPlatform.iOS
+    }
+    
     static var previews: some View {
         ArticleImage(imageLoader: ImageLoader (url: URL(string: "https://s.abcnews.com/images/Business/WireAP_6b82fe19ed404b0b8e96c9f4c9371e7c_16x9_992.jpg")))
       
     }
 }
+
+#endif
+#endif
+
 /*"https://bloximages.newyork1.vip.townnews.com/roanoke.com/content/tncms/assets/v3/editorial/d/8a/d8a782a4-d28d-5c61-b7e8-b8e124124179/5e3a53a33fe4a.image.jpg"
  
  "https://s.abcnews.com/images/Business/WireAP_6b82fe19ed404b0b8e96c9f4c9371e7c_16x9_992.jpg"

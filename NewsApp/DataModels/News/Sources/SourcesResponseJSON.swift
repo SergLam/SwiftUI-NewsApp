@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct SourcesResponseJSON: Codable {
+struct SourcesResponseJSON: Codable, JSONAble {
+    
     let status: String
     let sources: [SourceJSON]
     

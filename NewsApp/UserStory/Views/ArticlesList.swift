@@ -53,8 +53,23 @@ struct ArticlesList: View {
 let calendar = Calendar.current
 let components1 = DateComponents(calendar: calendar, year: 2020, month: 1, day: 23)
 let sampleArticle1 = ArticleJSON (title: "Emoji reactions are sliding into Twitter’s DMs - The Verge", description: "Twitter’s direct messages now support emoji reactions. To use them, you can either tap the small “heart and plus icon” that appears to the right of messages you receive, or double tap a message on mobile.", author: "Jon Porter", urlToImage: "https://cdn.vox-cdn.com/thumbor/--0kTTyAQnE5e8LMunWwCIl-wEw=/0x173:2040x1241/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/10456871/mdoying_180117_2249_twitter_0303stills.jpg", publishedAt: calendar.date(from: components1)!, source: SourceJSON(id: "the-verge", name: "the-verge", description: "", country: "us", category: "general", url: "https://cdn.vox-cdn.com"), url: "null")
+
+#if DEBUG
+#if targetEnvironment(simulator)
+
+// MARK: - Preview
 struct ArticlesList_Previews: PreviewProvider {
+    
+    static var devices = AppConstants.previewDevices
+    
+    static var platform: PreviewPlatform? {
+        return SwiftUI.PreviewPlatform.iOS
+    }
+    
     static var previews: some View {
         ArticlesList(articles: [sampleArticle1])
     }
 }
+
+#endif
+#endif

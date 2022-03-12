@@ -6,9 +6,47 @@
   Copyright © 2022 Serhii Liamtsev. All rights reserved.
 */
 
+// MARK: - General
+
+/** OK button title. */
+"ok.button-title" = "OK";
+
+/** Search text field placeholder. */
+"search.field-placeholder" = "search";
 
 
 // MARK: - Articles
 
 /** Articles search screen - default text for search field. */
 "articles.search.default-text" = "sports";
+
+/** Articles search screen - top headlines category tab. */
+"articles.categories.top-headlines" = "topHeadLines";
+
+/** Articles search screen - from category tab. */
+"articles.categories.from-category" = "from category";
+
+/** Articles search screen - default search text. */
+"articles.categories.default-search-text" = "science";
+
+// MARK: - Articles categories
+
+/** Articles search screen - from category tab - "sports" sub-tab. */
+"articles.category-sports" = "sports";
+
+/** Articles search screen - from category tab - "health" sub-tab. */
+"articles.category-health" = "health";
+
+/** Articles search screen - from category tab - "science" sub-tab. */
+"articles.category-science" = "science";
+
+/** Articles search screen - from category tab - "business" sub-tab. */
+"articles.category-business" = "business";
+
+/** Articles search screen - from category tab - "business" sub-tab. */
+"articles.category-technology" = "technology";
+
+// MARK: - Errors
+
+/** Alert title for network error. */
+"error.network-error.alert-title" = "Network error";

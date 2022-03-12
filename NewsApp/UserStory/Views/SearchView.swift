@@ -30,8 +30,22 @@ struct SearchView: View {
     }
 }
 
+#if DEBUG
+#if targetEnvironment(simulator)
+
+// MARK: - Preview
 struct SearchView_Previews: PreviewProvider {
+    
+    static var devices = AppConstants.previewDevices
+    
+    static var platform: PreviewPlatform? {
+        return SwiftUI.PreviewPlatform.iOS
+    }
+    
     static var previews: some View {
         SearchView(searchTerm: .constant(""))
     }
 }
+
+#endif
+#endif

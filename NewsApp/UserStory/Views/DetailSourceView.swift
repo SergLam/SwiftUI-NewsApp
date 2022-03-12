@@ -50,8 +50,22 @@ struct DetailSourceView: View {
     }
 }
 
+#if DEBUG
+#if targetEnvironment(simulator)
+
+// MARK: - Preview
 struct DetailSourceView_Previews: PreviewProvider {
+    
+    static var devices = AppConstants.previewDevices
+    
+    static var platform: PreviewPlatform? {
+        return SwiftUI.PreviewPlatform.iOS
+    }
+    
     static var previews: some View {
-        DetailSourceView(source: sampleSource1, articlesViewModel:  ArticlesViewModel(index: 3, text: "abc-news"))
+        DetailSourceView(source: SourceJSON.mock(isSuccess: true), articlesViewModel:  ArticlesViewModel(index: 3, text: "abc-news"))
     }
 }
+
+#endif
+#endif

@@ -40,8 +40,22 @@ struct ContentView: View {
     } // body
 }
 
+#if DEBUG
+#if targetEnvironment(simulator)
+
+// MARK: - Preview
 struct ContentView_Previews: PreviewProvider {
+    
+    static var devices = AppConstants.previewDevices
+    
+    static var platform: PreviewPlatform? {
+        return SwiftUI.PreviewPlatform.iOS
+    }
+    
     static var previews: some View {
         ContentView()
     }
 }
+
+#endif
+#endif

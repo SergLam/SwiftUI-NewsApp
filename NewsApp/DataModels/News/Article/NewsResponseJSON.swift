@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct NewsResponseJSON: Codable {
+struct NewsResponseJSON: Codable, JSONAble {
     
     let status: String?
     let totalResults: Int?

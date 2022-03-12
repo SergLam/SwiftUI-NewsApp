@@ -22,8 +22,22 @@ struct SafariView : UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {}
 }
 
+#if DEBUG
+#if targetEnvironment(simulator)
+
+// MARK: - Preview
 struct SafariView_Previews: PreviewProvider {
+    
+    static var devices = AppConstants.previewDevices
+    
+    static var platform: PreviewPlatform? {
+        return SwiftUI.PreviewPlatform.iOS
+    }
+    
     static var previews: some View {
         SafariView(url: URL(string: "https://abcnews.go.com")!)
     }
 }
+
+#endif
+#endif

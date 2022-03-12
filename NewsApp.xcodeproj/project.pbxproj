@@ -36,6 +36,8 @@
 		04E7446827DB8A4900A838C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04E7446727DB8A4900A838C2 /* Localizable.strings */; };
 		04E7446A27DB8A6800A838C2 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7446927DB8A6800A838C2 /* LocalizedStrings.swift */; };
 		04E7446C27DB8C0700A838C2 /* SupportedCountries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7446B27DB8C0700A838C2 /* SupportedCountries.swift */; };
+		04E7447227DD03F700A838C2 /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7447127DD03F700A838C2 /* Mockable.swift */; };
+		04E7447427DD048600A838C2 /* JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7447327DD048600A838C2 /* JSONAble.swift */; };
 		E43B7B1823E72459008039FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43B7B1723E72459008039FD /* ContentView.swift */; };
 		E44C4E6B23D8B360001E3D64 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C4E6A23D8B360001E3D64 /* SearchView.swift */; };
 		E44C4E6D23D99571001E3D64 /* SourcesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C4E6C23D99570001E3D64 /* SourcesViewModel.swift */; };
@@ -91,6 +93,8 @@
 		04E7446727DB8A4900A838C2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		04E7446927DB8A6800A838C2 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
 		04E7446B27DB8C0700A838C2 /* SupportedCountries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedCountries.swift; sourceTree = "<group>"; };
+		04E7447127DD03F700A838C2 /* Mockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockable.swift; sourceTree = "<group>"; };
+		04E7447327DD048600A838C2 /* JSONAble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONAble.swift; sourceTree = "<group>"; };
 		E43B7B1723E72459008039FD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E44C4E6A23D8B360001E3D64 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		E44C4E6C23D99570001E3D64 /* SourcesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesViewModel.swift; sourceTree = "<group>"; };
@@ -407,6 +411,23 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		04E7446F27DD03B500A838C2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				04E7447027DD03EA00A838C2 /* DataModels */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		04E7447027DD03EA00A838C2 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				04E7447127DD03F700A838C2 /* Mockable.swift */,
+				04E7447327DD048600A838C2 /* JSONAble.swift */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
 		E44C4E6923D8AF35001E3D64 /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +494,7 @@
 		E470D64A23A8B3E800D26871 /* NewsApp */ = {
 			isa = PBXGroup;
 			children = (
+				04E7446F27DD03B500A838C2 /* Protocols */,
 				0465EF5E27C58B8100438543 /* Extensions */,
 				0465EF5A27C5053600438543 /* Resources */,
 				0465EF5927C5051A00438543 /* BundleFiles */,
@@ -576,6 +598,7 @@
 				E470D64C23A8B3E800D26871 /* AppDelegate.swift in Sources */,
 				0465EF4927C500E700438543 /* ImageLoaderCache.swift in Sources */,
 				0465EF6927C6146E00438543 /* Decodable+Ext.swift in Sources */,
+				04E7447227DD03F700A838C2 /* Mockable.swift in Sources */,
 				E44C4E6B23D8B360001E3D64 /* SearchView.swift in Sources */,
 				E467587423E3434800E98AE5 /* TabedView.swift in Sources */,
 				0465EF8F27C6170E00438543 /* Environment.swift in Sources */,
@@ -591,6 +614,7 @@
 				E470D66823A8E74E00D26871 /* ArticleImage.swift in Sources */,
 				E45E0DD723EFCE2700D7EA76 /* ArticleViewModelErr.swift in Sources */,
 				E44C4E7D23D9FB52001E3D64 /* DetailSourceView.swift in Sources */,
+				04E7447427DD048600A838C2 /* JSONAble.swift in Sources */,
 				E44C4E7123D9A498001E3D64 /* SafariView.swift in Sources */,
 				0465EF7527C6158F00438543 /* DateFormatter+Ext.swift in Sources */,
 				04E7446C27DB8C0700A838C2 /* SupportedCountries.swift in Sources */,

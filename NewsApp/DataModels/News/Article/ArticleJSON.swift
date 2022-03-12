@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ArticleJSON: Codable, Identifiable {
+struct ArticleJSON: Codable, Identifiable, JSONAble {
     
     let id = UUID()
     let title: String
