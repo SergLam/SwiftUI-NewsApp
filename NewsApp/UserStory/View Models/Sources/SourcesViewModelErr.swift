@@ -16,7 +16,7 @@ final class SourcesViewModelErr: ObservableObject {
     @Published var searchString: String = "" {
         didSet {
             validString.sink(receiveValue: { [weak self] value in
-                self?.objectWillChange.send()
+                self?.searchForSource(value)
             }).store(in: &self.cancellableSet)
         }
     }
@@ -28,7 +28,7 @@ final class SourcesViewModelErr: ObservableObject {
     @Published var sourcesError: NewsError?
     
     private var validString: AnyPublisher<String, Never> {
-        $searchString
+        return $searchString
             .debounce(for: 0.1, scheduler: RunLoop.main)
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -37,12 +37,12 @@ final class SourcesViewModelErr: ObservableObject {
     private var cancellableSet: Set<AnyCancellable> = []
     
     init() {
-        searchForSource()
+        searchForSource(searchString)
     }
     
-    func searchForSource() {
-        
-        Publishers.CombineLatest( $country, validString)
+    func searchForSource(_ query: String) {
+        let publisher = [query].publisher.eraseToAnyPublisher()
+        Publishers.CombineLatest($country, publisher)
         .setFailureType(to: NewsError.self)
         .flatMap { (country, search) ->
                                AnyPublisher<[SourceJSON], NewsError> in

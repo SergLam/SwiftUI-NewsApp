@@ -18,11 +18,26 @@ struct AlertButtonView: View {
     var buttonTitle: AlertAction
     
     var body: some View {
-        Button(buttonTitle.title) {
-            action = buttonTitle
-            shown.toggle()
-        }.frame(width: UIScreen.main.bounds.width / 2 - 30, height: 40)
-        .foregroundColor(.white)
+        GeometryReader { geometry in
+            Button(action: {
+                action = buttonTitle
+                shown.toggle()
+            }) {
+                Text(buttonTitle.title)
+                    .frame(
+                        minWidth: (geometry.size.width / 2) - 25,
+                        maxWidth: .infinity, minHeight: 44
+                    )
+                    .font(Font.subheadline.weight(.bold))
+                    .background(Color.white).opacity(0.8)
+                    .foregroundColor(Color.black)
+                    .cornerRadius(12)
+                
+            }
+            .lineLimit(2)
+            .multilineTextAlignment(.center)
+            .padding([.leading,.trailing], 5)
+        }
     }
 }
 

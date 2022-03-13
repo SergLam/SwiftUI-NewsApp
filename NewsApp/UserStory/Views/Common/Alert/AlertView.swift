@@ -29,13 +29,15 @@ struct AlertView: View {
             Text(message).foregroundColor(Color.white)
             Spacer()
             Divider()
+            Spacer()
             HStack {
                 ForEach(actions, id: \.self) {
                     AlertButtonView(shown: $shown, action: action, buttonTitle: $0)
                 }
             }
+            Spacer()
         }
-        .frame(width: UIScreen.main.bounds.width - 50, height: 200)
+        .frame(minWidth: .zero, idealWidth: UIScreen.main.bounds.width - 50, maxWidth: UIScreen.main.bounds.width - 50, minHeight: .zero, idealHeight: 180, maxHeight: 180, alignment: Alignment.center)
         .background(Color.black.opacity(0.5))
         .cornerRadius(12)
         .clipped()
