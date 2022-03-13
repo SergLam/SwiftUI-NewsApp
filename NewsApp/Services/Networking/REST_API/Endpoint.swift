@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Endpoint {
+enum Endpoint: EndpointProtocol {
     
     case topHeadLines
     case articlesFromCategory(_ category: String)
@@ -16,7 +16,7 @@ enum Endpoint {
     case search(searchFilter: String)
     case sources(country: String)
     
-    var baseURL:URL {
+    var baseURL: URL {
         return Environment.restBaseURL
     }
     
@@ -31,48 +31,79 @@ enum Endpoint {
         }
     }
     
+    var httpMethod: HTTPMethod {
+        switch self {
+        case .topHeadLines:
+            return .get
+        case .articlesFromCategory:
+            return .get
+        case .articlesFromSource:
+            return .get
+        case .search:
+            return .get
+        case .sources:
+            return .get
+        }
+    }
+    
     var absoluteURL: URL? {
         let queryURL = baseURL.appendingPathComponent(self.path)
         let components = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)
         guard var urlComponents = components else {
-            return nil
+            return baseURL
         }
-        switch self {
-        case .topHeadLines:
-            urlComponents.queryItems = [URLQueryItem(name: "country", value: region),
-                                        URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
-                                       ]
-        case .articlesFromCategory(let category):
-            urlComponents.queryItems = [URLQueryItem(name: "country", value: region),
-                                        URLQueryItem(name: "category", value: category),
-                                        URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
-                                        ]
-        case .sources (let country):
-            urlComponents.queryItems = [URLQueryItem(name: "country", value: country),
-                                        URLQueryItem(name: "language", value: countryLang[country]),
-                                        URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
-                                       ]
-        case .articlesFromSource (let source):
-            urlComponents.queryItems = [URLQueryItem(name: "sources", value: source),
-                                      /*  URLQueryItem(name: "language", value: locale),*/
-                                        URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
-                                       ]
-        case .search (let searchFilter):
-            urlComponents.queryItems = [URLQueryItem(name: "q", value: searchFilter.lowercased()),
-                                       /*URLQueryItem(name: "language", value: locale),*/
-                                       /* URLQueryItem(name: "country", value: region),*/
-                                        URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
-                                      ]
-        }
+        urlComponents.queryItems = self.queryItems
         return urlComponents.url
     }
     
+    var queryItems: [URLQueryItem]? {
+        switch self {
+        case .topHeadLines:
+            return [
+                URLQueryItem(name: "country", value: region),
+                URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
+            ]
+        case .articlesFromCategory(let category):
+            return [
+                URLQueryItem(name: "country", value: region),
+                URLQueryItem(name: "category", value: category),
+                URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
+            ]
+        case .sources(let country):
+            return [
+                URLQueryItem(name: "country", value: country),
+                URLQueryItem(name: "language", value: countryLang[country]),
+                URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
+            ]
+        case .articlesFromSource(let source):
+            return [
+                URLQueryItem(name: "sources", value: source),
+             /* URLQueryItem(name: "language", value: locale), */
+                URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
+            ]
+        case .search(let searchFilter):
+            return [
+                URLQueryItem(name: "q", value: searchFilter.lowercased()),
+             /* URLQueryItem(name: "language", value: locale), */
+             /* URLQueryItem(name: "country", value: region), */
+                URLQueryItem(name: "apikey", value: RestApiConstants.apiKey)
+            ]
+        }
+    }
+    
+    var parameters: [String: Any]? {
+        switch self {
+        default:
+            return nil
+        }
+    }
+    
     var locale: String {
-        return  Locale.current.languageCode ?? "en"
+        return Locale.current.languageCode ?? "en"
     }
     
     var region: String {
-        return  Locale.current.regionCode?.lowercased() ?? "us"
+        return Locale.current.regionCode?.lowercased() ?? "us"
     }
     
     init? (index: Int, text: String = "sports") {

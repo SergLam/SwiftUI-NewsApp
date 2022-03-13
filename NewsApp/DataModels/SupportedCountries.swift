@@ -11,4 +11,12 @@ import Foundation
 enum SupportedCountries: String, CaseIterable {
     
     case unitedStates = "us"
+    case greatBritain = "gb"
+    case canada = "ca"
+    case russia = "ru"
+    case france = "fr"
+    case germany = "de"
+    case italy = "it"
+    case india = "in"
+    case saudiArabia = "sa"
 }

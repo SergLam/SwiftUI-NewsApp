@@ -61,3 +61,29 @@ enum NewsError: Error, LocalizedError, Identifiable {
     }
 }
 
+
+// MARK: - Hashable
+extension NewsError: Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(localizedDescription)
+    }
+    
+}
+
+// MARK: - Equatable
+extension NewsError: Equatable {
+    
+    static func == (lhs: NewsError, rhs: NewsError) -> Bool {
+        return lhs.localizedDescription == rhs.localizedDescription
+    }
+    
+    static func == (lhs: NewsError, rhs: Error) -> Bool {
+        return lhs.localizedDescription == rhs.localizedDescription
+    }
+    
+    static func == (lhs: Error, rhs: NewsError) -> Bool {
+        return lhs.localizedDescription == rhs.localizedDescription
+    }
+    
+}

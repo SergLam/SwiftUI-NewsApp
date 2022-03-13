@@ -11,6 +11,9 @@
 /** OK button title. */
 "ok.button-title" = "OK";
 
+/** Cancel button title. */
+"cancel.button-title" = "Cancel";
+
 /** Search text field placeholder. */
 "search.field-placeholder" = "search";
 

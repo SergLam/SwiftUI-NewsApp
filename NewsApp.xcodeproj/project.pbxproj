@@ -39,6 +39,12 @@
 		04E7447227DD03F700A838C2 /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7447127DD03F700A838C2 /* Mockable.swift */; };
 		04E7447427DD048600A838C2 /* JSONAble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7447327DD048600A838C2 /* JSONAble.swift */; };
 		04E7447B27DD1AD600A838C2 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7447A27DD1AD600A838C2 /* AlertView.swift */; };
+		04E7447E27DE1D7A00A838C2 /* AlertButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7447D27DE1D7A00A838C2 /* AlertButtonView.swift */; };
+		04E7448027DE1D8800A838C2 /* AlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7447F27DE1D8800A838C2 /* AlertAction.swift */; };
+		04E7448227DE584000A838C2 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7448127DE584000A838C2 /* HTTPMethod.swift */; };
+		04E7448427DE592700A838C2 /* Dictionary+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7448327DE592700A838C2 /* Dictionary+Ext.swift */; };
+		04E7448727DE59F500A838C2 /* EndpointProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7448627DE59F500A838C2 /* EndpointProtocol.swift */; };
+		04E7448927DE5E1C00A838C2 /* URLQueryItem+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7448827DE5E1C00A838C2 /* URLQueryItem+Ext.swift */; };
 		E43B7B1823E72459008039FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43B7B1723E72459008039FD /* ContentView.swift */; };
 		E44C4E6B23D8B360001E3D64 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C4E6A23D8B360001E3D64 /* SearchView.swift */; };
 		E44C4E6D23D99571001E3D64 /* SourcesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44C4E6C23D99570001E3D64 /* SourcesViewModel.swift */; };
@@ -97,6 +103,12 @@
 		04E7447127DD03F700A838C2 /* Mockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockable.swift; sourceTree = "<group>"; };
 		04E7447327DD048600A838C2 /* JSONAble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONAble.swift; sourceTree = "<group>"; };
 		04E7447A27DD1AD600A838C2 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		04E7447D27DE1D7A00A838C2 /* AlertButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButtonView.swift; sourceTree = "<group>"; };
+		04E7447F27DE1D8800A838C2 /* AlertAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAction.swift; sourceTree = "<group>"; };
+		04E7448127DE584000A838C2 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		04E7448327DE592700A838C2 /* Dictionary+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Ext.swift"; sourceTree = "<group>"; };
+		04E7448627DE59F500A838C2 /* EndpointProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointProtocol.swift; sourceTree = "<group>"; };
+		04E7448827DE5E1C00A838C2 /* URLQueryItem+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLQueryItem+Ext.swift"; sourceTree = "<group>"; };
 		E43B7B1723E72459008039FD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E44C4E6A23D8B360001E3D64 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		E44C4E6C23D99570001E3D64 /* SourcesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesViewModel.swift; sourceTree = "<group>"; };
@@ -331,6 +343,8 @@
 				0465EF7027C6158F00438543 /* OSLog */,
 				0465EF6127C6146E00438543 /* Codable */,
 				0465EF6527C6146E00438543 /* Data */,
+				04E7448327DE592700A838C2 /* Dictionary+Ext.swift */,
+				04E7448827DE5E1C00A838C2 /* URLQueryItem+Ext.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -400,6 +414,7 @@
 		0465EF9227C6191700438543 /* REST_API */ = {
 			isa = PBXGroup;
 			children = (
+				04E7448527DE59E700A838C2 /* Base */,
 				E470D65F23A8B44000D26871 /* NewsAPI.swift */,
 				0465EF9327C6193600438543 /* RestApiConstants.swift */,
 				0465EF9527C61A1C00438543 /* Endpoint.swift */,
@@ -481,9 +496,20 @@
 		04E7447C27DD1D8400A838C2 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
+				04E7447F27DE1D8800A838C2 /* AlertAction.swift */,
 				04E7447A27DD1AD600A838C2 /* AlertView.swift */,
+				04E7447D27DE1D7A00A838C2 /* AlertButtonView.swift */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		04E7448527DE59E700A838C2 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				04E7448127DE584000A838C2 /* HTTPMethod.swift */,
+				04E7448627DE59F500A838C2 /* EndpointProtocol.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		E44C4E6923D8AF35001E3D64 /* Image */ = {
@@ -650,6 +676,7 @@
 				0465EF4927C500E700438543 /* ImageLoaderCache.swift in Sources */,
 				0465EF6927C6146E00438543 /* Decodable+Ext.swift in Sources */,
 				04E7447227DD03F700A838C2 /* Mockable.swift in Sources */,
+				04E7448227DE584000A838C2 /* HTTPMethod.swift in Sources */,
 				E44C4E6B23D8B360001E3D64 /* SearchView.swift in Sources */,
 				E467587423E3434800E98AE5 /* TabedView.swift in Sources */,
 				0465EF8F27C6170E00438543 /* Environment.swift in Sources */,
@@ -669,10 +696,12 @@
 				E44C4E7123D9A498001E3D64 /* SafariView.swift in Sources */,
 				0465EF7527C6158F00438543 /* DateFormatter+Ext.swift in Sources */,
 				04E7446C27DB8C0700A838C2 /* SupportedCountries.swift in Sources */,
+				04E7448727DE59F500A838C2 /* EndpointProtocol.swift in Sources */,
 				E470D64E23A8B3E800D26871 /* SceneDelegate.swift in Sources */,
 				E44C4E6F23D99AFF001E3D64 /* ContentViewSources.swift in Sources */,
 				E470D66C23A8E77500D26871 /* ImageLoader.swift in Sources */,
 				0465EF7F27C6162700438543 /* UserDefaults+Codable.swift in Sources */,
+				04E7447E27DE1D7A00A838C2 /* AlertButtonView.swift in Sources */,
 				0465EF8827C616B600438543 /* AppInternalError.swift in Sources */,
 				0465EF9627C61A1C00438543 /* Endpoint.swift in Sources */,
 				E45E0DD523EFCCA300D7EA76 /* NewsError.swift in Sources */,
@@ -680,15 +709,18 @@
 				0465EF8027C6162700438543 /* UserDefaults+AppSettings.swift in Sources */,
 				E470D66023A8B44000D26871 /* NewsAPI.swift in Sources */,
 				0465EF5127C502E200438543 /* NewsResponseJSON.swift in Sources */,
+				04E7448927DE5E1C00A838C2 /* URLQueryItem+Ext.swift in Sources */,
 				04E7447B27DD1AD600A838C2 /* AlertView.swift in Sources */,
 				E470D66223A8B48A00D26871 /* ArticleJSON.swift in Sources */,
 				0465EF7427C6158F00438543 /* OSLog+Ext.swift in Sources */,
+				04E7448427DE592700A838C2 /* Dictionary+Ext.swift in Sources */,
 				0465EF7827C615C500438543 /* SharedTypeAliases.swift in Sources */,
 				0465EF9427C6193600438543 /* RestApiConstants.swift in Sources */,
 				0465EF8127C6162700438543 /* UserDefaults+Ext.swift in Sources */,
 				0465EF6D27C614B600438543 /* AppConstants.swift in Sources */,
 				0465EF6727C6146E00438543 /* Codable+Ext.swift in Sources */,
 				E44C4E6D23D99571001E3D64 /* SourcesViewModel.swift in Sources */,
+				04E7448027DE1D8800A838C2 /* AlertAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -840,6 +872,7 @@
 				DEVELOPMENT_TEAM = QLY879YR3Y;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/NewsApp/BundleFiles/Plist/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -861,6 +894,7 @@
 				DEVELOPMENT_TEAM = QLY879YR3Y;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/NewsApp/BundleFiles/Plist/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

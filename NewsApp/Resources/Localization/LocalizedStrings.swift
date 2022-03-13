@@ -20,6 +20,10 @@ struct LocalizedStrings {
         return NSLocalizedString("ok.button-title", tableName: nil, bundle: stringsBundle, value: "", comment: "OK button title")
     }
     
+    static var cancelButtonTitle: String {
+        return NSLocalizedString("cancel.button-title", tableName: nil, bundle: stringsBundle, value: "", comment: "Cancel button title")
+    }
+    
     static var searchFieldPlaceholder: String {
         return NSLocalizedString("search.field-placeholder", tableName: nil, bundle: stringsBundle, value: "", comment: "Search text field placeholder")
     }

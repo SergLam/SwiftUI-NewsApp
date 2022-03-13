@@ -10,41 +10,58 @@ import Combine
 import Foundation
 
 final class SourcesViewModelErr: ObservableObject {
+    
      var newsAPI = NewsAPI.shared
     // input
-    @Published var searchString: String = ""
+    @Published var searchString: String = "" {
+        didSet {
+            validString.sink(receiveValue: { [weak self] value in
+                self?.objectWillChange.send()
+            }).store(in: &self.cancellableSet)
+        }
+    }
+    
     @Published var country: String = SupportedCountries.unitedStates.rawValue
     // output
     @Published var sources = [SourceJSON]()
+    
     @Published var sourcesError: NewsError?
     
-    private var validString:  AnyPublisher<String, Never> {
+    private var validString: AnyPublisher<String, Never> {
         $searchString
             .debounce(for: 0.1, scheduler: RunLoop.main)
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
+    
+    private var cancellableSet: Set<AnyCancellable> = []
+    
     init() {
-          Publishers.CombineLatest( $country,  validString)
-          .setFailureType(to: NewsError.self)
-          .flatMap {  (country, search) ->
-                                 AnyPublisher<[SourceJSON], NewsError> in
-              return self.newsAPI.fetchSourcesErr(for: country)
-             .map{search == "" ? $0 : $0.filter {
-                    ($0.name?.lowercased().contains(search.lowercased()))!}}
-            .eraseToAnyPublisher()
-          }
-          .sink(
-              receiveCompletion:  {[unowned self] (completion) in
-              if case let .failure(error) = completion {
-                  self.sourcesError = error
-              }},
-                receiveValue: { [unowned self] in
-                  self.sources = $0
-          })
-          .store(in: &self.cancellableSet)
-      }
-     private var cancellableSet: Set<AnyCancellable> = []
+        searchForSource()
+    }
+    
+    func searchForSource() {
+        
+        Publishers.CombineLatest( $country, validString)
+        .setFailureType(to: NewsError.self)
+        .flatMap { (country, search) ->
+                               AnyPublisher<[SourceJSON], NewsError> in
+            return self.newsAPI.fetchSourcesErr(for: country)
+           .map{search == "" ? $0 : $0.filter {
+                  ($0.name?.lowercased().contains(search.lowercased()))!}}
+          .eraseToAnyPublisher()
+        }
+        .sink(
+            receiveCompletion:  {[unowned self] (completion) in
+            if case let .failure(error) = completion {
+                self.sourcesError = error
+            }},
+              receiveValue: { [unowned self] in
+                self.sources = $0
+        })
+        .store(in: &self.cancellableSet)
+    }
+     
  /*
     init() {
         Publishers.CombineLatest( $country,  validString)

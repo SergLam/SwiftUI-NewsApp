@@ -18,7 +18,10 @@ final class NewsAPI {
     // Асинхронная выборка на основе URL
     func fetch<T: Decodable>(_ url: URL) -> AnyPublisher<T, Error> {
         URLSession.shared.dataTaskPublisher(for: url)             // 1
-            .map { $0.data}                                          // 2
+            .map {
+                self.logResponse(url: url, data: $0.data, response: $0.response, error: nil)
+                return $0.data
+            }                                          // 2
             .decode(type: T.self, decoder: RestApiConstants.jsonDecoder) // 3
             .receive(on: RunLoop.main)                               // 4
             .eraseToAnyPublisher()                                   // 5
@@ -34,6 +37,7 @@ final class NewsAPI {
                             ((response as? HTTPURLResponse)?.statusCode ?? 500,
                              String(data: data, encoding: .utf8) ?? ""))
                       }
+                self.logResponse(url: url, data: data, response: response, error: nil)
                 return data
             }
             .decode(type: T.self, decoder: RestApiConstants.jsonDecoder)  // 3
@@ -42,14 +46,15 @@ final class NewsAPI {
     }
     
     // Асинхронная выборка статей
-    func fetchArticles(from endpoint: Endpoint)
-    -> AnyPublisher<[ArticleJSON], Never> {
+    func fetchArticles(from endpoint: Endpoint) -> AnyPublisher<[ArticleJSON], Never> {
         guard let url = endpoint.absoluteURL else {
             return Just([ArticleJSON]()).eraseToAnyPublisher() // 0
         }
+        self.logRequest(endpoint: endpoint)
         return fetch(url)                                          // 1
             .map { (response: NewsResponseJSON) -> [ArticleJSON] in        // 2
-                return response.articles }
+                return response.articles
+            }
             .replaceError(with: [ArticleJSON]())                    // 3
             .eraseToAnyPublisher()                              // 4
     }
@@ -78,9 +83,11 @@ final class NewsAPI {
                 return promise(
                     .failure(.urlError(URLError(.unsupportedURL)))) // 0
             }
+            self.logRequest(endpoint: endpoint)
             self.fetchErr(url)                                          // 1
                 .tryMap { (result: NewsResponseJSON) -> [ArticleJSON] in  // 2
-                    result.articles }
+                    result.articles
+                }
                 .sink(
                     receiveCompletion: { (completion) in                  // 3
                         if case let .failure(error) = completion {
@@ -96,7 +103,9 @@ final class NewsAPI {
                             }
                         }
                     },
-                    receiveValue: { promise(.success($0)) })  // 4
+                    receiveValue: {
+                        promise(.success($0))
+                    })  // 4
                 .store(in: &self.subscriptions)  // 5
         }
         .eraseToAnyPublisher() // 6
@@ -106,13 +115,16 @@ final class NewsAPI {
     func fetchSourcesErr(for country: String) ->
     AnyPublisher<[SourceJSON], NewsError>{
         Future<[SourceJSON], NewsError> { [unowned self] promise in
-            guard let url = Endpoint.sources(country: country).absoluteURL  else {
+            let endpoint = Endpoint.sources(country: country)
+            guard let url = endpoint.absoluteURL  else {
                 return promise(
                     .failure(.urlError(URLError(.unsupportedURL)))) // 0
             }
+            self.logRequest(endpoint: endpoint)
             self.fetchErr(url)                                      // 1
                 .tryMap { (result: SourcesResponseJSON) -> [SourceJSON] in // 2
-                    result.sources }
+                    result.sources
+                }
                 .sink(
                     receiveCompletion: { (completion) in                    // 3
                         if case let .failure(error) = completion {
@@ -128,10 +140,81 @@ final class NewsAPI {
                             }
                         }
                     },
-                    receiveValue: { promise(.success($0)) }) // 4
+                    receiveValue: {
+                        promise(.success($0))
+                    }) // 4
                 .store(in: &self.subscriptions) // 5
         }
         .eraseToAnyPublisher()        // 6
+    }
+    
+    private func logRequest(endpoint: EndpointProtocol) {
+        
+        print("", separator: "\n", terminator: "\n")
+        print("NETWORK LOGGER:", separator: "\n", terminator: "\n")
+        print("REQUEST METHOD: \(endpoint.httpMethod.rawValue)", separator: "\n", terminator: "\n")
+        // print("REQUEST HEADERS: \(endpoint.HTTPHeaderFields?.jsonString ?? "")", separator: "\n", terminator: "\n")
+        print("REQUEST URL: \(endpoint.baseURL.absoluteString + endpoint.path)", separator: "\n", terminator: "\n")
+        
+        if let body = endpoint.parameters {
+            
+            print("REQUEST BODY PARAMETERS: \(body.jsonString ?? "")", separator: "\n", terminator: "\n")
+            
+        } else if let queryParams = endpoint.queryItems {
+            var resultDict: [String: String?] = [:]
+            let dictionaries: [[String: String?]] = queryParams.map{ $0.dictionary }
+            for dictionary in dictionaries {
+                for item in dictionary {
+                    resultDict[item.key] = item.value
+                }
+            }
+            
+            print("REQUEST QUERY PARAMETERS: \(resultDict.jsonString ?? "")", separator: "\n", terminator: "\n")
+        }
+    }
+    
+    private func logResponse(endpoint: EndpointProtocol, data: Data?, response: URLResponse?, error: Error?) {
+        
+        print("", separator: "\n", terminator: "\n")
+        print("NETWORK LOGGER:", separator: "\n", terminator: "\n")
+        if let url = response?.url {
+            print(url, separator: "\n", terminator: "\n")
+        }
+        if let response = response as? HTTPURLResponse {
+            print("Status code: \(response.statusCode)", separator: "\n", terminator: "\n")
+        }
+        if let data = data {
+            if let jsonString = data.prettyJson {
+                print(jsonString, separator: "\n", terminator: "\n")
+            } else {
+                print("Response Data bytes: \(data.count)", separator: "\n", terminator: "\n")
+            }
+        }
+        if let error = error {
+            print(error, separator: "\n", terminator: "\n")
+        }
+        print("", separator: "\n", terminator: "\n")
+    }
+    
+    private func logResponse(url: URL, data: Data?, response: URLResponse?, error: Error?) {
+        
+        print("", separator: "\n", terminator: "\n")
+        print("NETWORK LOGGER:", separator: "\n", terminator: "\n")
+        print(url.absoluteString, separator: "\n", terminator: "\n")
+        if let response = response as? HTTPURLResponse {
+            print("Status code: \(response.statusCode)", separator: "\n", terminator: "\n")
+        }
+        if let data = data {
+            if let jsonString = data.prettyJson {
+                print(jsonString, separator: "\n", terminator: "\n")
+            } else {
+                print("Response Data bytes: \(data.count)", separator: "\n", terminator: "\n")
+            }
+        }
+        if let error = error {
+            print(error, separator: "\n", terminator: "\n")
+        }
+        print("", separator: "\n", terminator: "\n")
     }
     
     /*
